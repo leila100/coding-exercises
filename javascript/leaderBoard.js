@@ -8,11 +8,21 @@ For example, the four players on the leaderboard have high scores of 100, 90, 90
 Those players will have ranks 1, 2, 2, 3 and , respectively. If Alice's scores are 70, 80 and 105, 
 her rankings after each game are 4th, 3rd and 1st.
 */
-function insert_score(score, leaderboard) {
-  for (let i = 0; i < leaderboard.length; i++) {
-    if (leaderboard[i] < score) return i;
+function insert_score(score, leaderboard, start_index, end_index) {
+  //   console.log(`score: ${score}, start: ${start_index}, end: ${end_index}`);
+  const length = end_index - start_index;
+  if (length <= 1) {
+    for (let i = start_index; i <= end_index; i++) {
+      if (leaderboard[i] <= score) return i;
+    }
+    return end_index + 1;
   }
-  return leaderboard.length;
+  const middle = Math.floor(length / 2) + start_index;
+  if (score > leaderboard[middle]) {
+    return insert_score(score, leaderboard, start_index, middle);
+  } else {
+    return insert_score(score, leaderboard, middle, end_index);
+  }
 }
 
 function climbingLeaderboard(scores, alice) {
@@ -22,17 +32,9 @@ function climbingLeaderboard(scores, alice) {
   const scores_arr = Array.from(scoresNoDuplicates).sort(function(a, b) {
     return b - a;
   });
-  console.log(scores_arr);
-  result = [];
+  const result = [];
   for (let i = 0; i < alice.length; i++) {
-    let index = scores_arr.length;
-    // find where score fits in the leaderboard
-    for (let j = 0; j < scores_arr.length; j++) {
-      if (scores_arr[j] <= alice[i]) {
-        index = j;
-        break;
-      }
-    }
+    const index = insert_score(alice[i], scores_arr, 0, scores_arr.length - 1);
     result.push(index + 1);
   }
   return result;
