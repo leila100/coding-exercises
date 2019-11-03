@@ -15,10 +15,6 @@ The prisoner to be warned sits in chair number 3.
 */
 
 function saveThePrisoner(n, m, s) {
-  //  number of prisoners left after all loops
-  //   let reminder;
-  //   reminder = m - n * Math.floor(m / n);
-  //   console.log(`reminder: ${reminder}`);
   const seat_last = s + m - 1;
   console.log(`seat_last: ${seat_last}`);
   if (seat_last % n === 0) return n;
