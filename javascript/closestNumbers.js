@@ -7,6 +7,7 @@ If there are multiple pairs, find them all.
 */
 
 function closestNumbers(arr) {
+  // sort the array so you only have to compare the number and the next number instead of all the pairs possible
   arr.sort((a, b) => a - b);
   let min;
   let result = [];
