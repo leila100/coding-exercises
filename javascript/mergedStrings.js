@@ -9,7 +9,9 @@ part1:  c   d   w         = cdw
 part2:    o   e   a r s   = oears
 */
 
-function isMerge(s, part1, part2) {
+function isMerge(s, part1, part2, cache = new Set()) {
+  if (cache.has(part1 + part2)) return false;
+
   if (part1.length + part2.length !== s.length) return False;
 
   if (!part1 || !part2 || !s) {
@@ -18,8 +20,9 @@ function isMerge(s, part1, part2) {
   }
   if (part1[0] !== s[0] && part2[0] !== s[0]) return false;
 
-  if (part1[0] === s[0] && isMerge(s.substr(1), part1.substr(1), part2)) return true;
-  if (part2[0] === s[0] && isMerge(s.substr(1), part1, part2.substr(1))) return true;
+  if (part1[0] === s[0] && isMerge(s.substr(1), part1.substr(1), part2, cache)) return true;
+  if (part2[0] === s[0] && isMerge(s.substr(1), part1, part2.substr(1), cache)) return true;
+  cache.add(part1 + part2);
   return false;
 }
 
