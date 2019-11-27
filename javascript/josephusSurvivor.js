@@ -17,20 +17,21 @@ one every 3 is eliminated until one remains
 */
 
 function josephusSurvivor(n, k) {
-    const picked = new Set();
-    let index = 0;
-    let counter;
-    while (picked.size < n) {
-        counter = 1;
-        while (counter <= k) {
-            index = (index + 1) % n;
-            if (index === 0) index = n;
-            if (!(picked.has(index))) counter += 1;
-        }
-        picked.add(index);
-        console.log(picked, picked.size)
+    const people = []
+    for (let i = 0; i < n; i++) {
+        people.push(i + 1)
     }
-    return index;
+    // recursive solution
+    function getLast(people, k, index) {
+        if (people.length === 1) return people[0]
+        const n = people.length
+        index = (index + k) % n;
+        if (index === 0) index = n;
+        people.splice(index - 1, 1)
+        return getLast(people, k, index - 1)
+    }
+    return getLast(people, k, 0)
 }
 
+console.log(josephusSurvivor(4576, 1143))
 console.log(josephusSurvivor(7, 3))
