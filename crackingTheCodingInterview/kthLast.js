@@ -45,6 +45,22 @@ kthToLast = (head, k, node) => {
     return newNode;
 }
 
+kthToLastIterative = (head, k) => {
+    let p1 = head;
+    let p2 = head;
+    // Move p1 k nodes
+    for (let i = 0; i < k; i++) {
+        if (p1 === null) return null; // out of bounds
+        p1 = p1.next;
+    }
+    // move p1 and p2. When p1 gets to end of list, p2 will be at the kth to last node
+    while (p1 !== null) {
+        p1 = p1.next;
+        p2 = p2.next;
+    }
+    return p2;
+}
+
 const list = new LinkedList(4)
 list.add(3)
 list.add(2)
@@ -54,5 +70,6 @@ list.add(6)
 list.add(5)
 // list.print()
 // printKthToLast(list.head, 5)
-const node = kthToLastRecursive(list.head, 2)
+// const node = kthToLastRecursive(list.head, 2)
+const node = kthToLastIterative(list.head, 5)
 console.log(node.data)
