@@ -25,21 +25,26 @@ def checkForadjacentDiggits(string):
             return True
     return False
 
+def checkIncrese(string):
+    flag = False
+    pointer = int(string[0])
+    for i in range(1, len(string)):
+        next_pointer = int(string[i])
+        if next_pointer < pointer:
+            flag = True
+            break
+        else:
+            pointer = next_pointer
+    return flag
+
 def passwords():
     value = 168630
     count = 0
     while value <= 718098:
         flag = False
         str_value = str(value)
+        flag = checkIncrese(str_value)
         if checkForadjacentDiggits(str_value):
-            pointer = int(str_value[0])
-            for i in range(1, len(str_value)):
-                next_pointer = int(str_value[i])
-                if next_pointer < pointer:
-                    flag = True
-                    break
-                else:
-                    pointer = next_pointer
             if flag is not True:
                 count += 1
         value += 1
