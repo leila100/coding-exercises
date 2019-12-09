@@ -62,33 +62,59 @@ def decode(codes):
             instruction = f'000{instruction}'
         elif len(instruction)==3:
             instruction = f'00{instruction}'
+        elif len(instruction)==4:
+            instruction = f'0{instruction}'
 
         if int(instruction[-2:]) == 1:
             if instruction[-3] == '1':
                 val1 = int(codes[counter + 1])
-            else:
+            elif instruction[-3] == '0':
                 val1 = codes[int(codes[counter + 1])]
+            elif instruction[-3] == '2':
+                val1 = codes[int(codes[counter + 1]) + relative_base]
+
             if instruction[-4] == '1':
                 val2 = int(codes[counter + 2])
-            else:
+            elif instruction[-4] == '0':
                 val2 = codes[int(codes[counter + 2])]
-            codes[int(codes[counter + 3])] = int(val1) + int(val2)
+            elif instruction[-4] == '2':
+                val2 = codes[int(codes[counter + 2]) + relative_base]
+
+            if instruction[-5] == '0':
+                codes[int(codes[counter + 3])] = int(val1) + int(val2)
+            elif instruction[-5] == '2':
+                codes[int(codes[counter + 3]) + relative_base] = int(val1) + int(val2)
             counter += 4
         elif int(instruction[-2:]) == 2:
             if instruction[-3] == '1':
                 val1 = int(codes[counter + 1])
-            else:
+            elif instruction[-3] == '0':
                 val1 = codes[int(codes[counter + 1])]
+            elif instruction[-3] == '2':
+                val1 = codes[int(codes[counter + 1]) + relative_base]
+
+
             if instruction[-4] == '1':
                 val2 = int(codes[counter + 2])
-            else:
+            elif instruction[-4] == '0':
                 val2 = codes[int(codes[counter + 2])]
-            codes[int(codes[counter + 3])] = int(val1) * int(val2)
+            elif instruction[-4] == '2':
+                val2 = codes[int(codes[counter + 2]) + relative_base]
+
+            if instruction[-5] == '0':
+                codes[int(codes[counter + 3])] = int(val1) * int(val2)
+            elif instruction[-5] == '2':
+                codes[int(codes[counter + 3]) + relative_base] = int(val1) * int(val2)
             counter += 4
         elif int(instruction[-2:]) == 3:
             unitID = input("Enter input ")
-            val = int(codes[counter + 1])
-            codes[val] = unitID
+            if instruction[-3] == '1':
+                val1 = codes[counter + 1]
+            elif instruction[-3] == '0':
+                val1 = codes[int(codes[counter + 1])]
+            elif instruction[-3] == '2':
+                val1 = int(codes[counter + 1]) + int(relative_base)
+            codes[int(val1)] = unitID
             counter += 2
         elif int(instruction[-2:]) == 4:
             if instruction[-3] == '1':
@@ -102,67 +128,112 @@ def decode(codes):
         elif int(instruction[-2:]) == 5:
             if instruction[-3] == '1':
                 val1 = codes[counter + 1]
-            else:
+            elif instruction[-3] == '0':
                 val1 = codes[int(codes[counter + 1])]
-            if val1 != '0':
+            elif instruction[-3] == '2':
+                val1 = codes[int(codes[counter + 1]) + relative_base]
+
+            if val1 != '0' and val1 != 0:
                 if instruction[-4] == '1':
                     val2 = codes[counter + 2]
-                else:
+                elif instruction[-4] == '0':
                     val2 = codes[int(codes[counter + 2])]
+                elif instruction[-4] == '2':
+                    val2 = codes[int(codes[counter + 2]) + relative_base]
+
                 counter = int(val2)
             else:
                 counter += 3
         elif int(instruction[-2:]) == 6:
             if instruction[-3] == '1':
                 val1 = codes[counter + 1]
-            else:
+            elif instruction[-3] == '0':
                 val1 = codes[int(codes[counter + 1])]
-            if val1 == '0':
+            elif instruction[-3] == '2':
+                val1 = codes[int(codes[counter + 1]) + relative_base]
+
+            if val1 == '0' or val1 == 0 :
                 if instruction[-4] == '1':
                     val2 = codes[counter + 2]
-                else:
+                elif instruction[-4] == '0':
                     val2 = codes[int(codes[counter + 2])]
+                elif instruction[-4] == '2':
+                    val2 = codes[int(codes[counter + 2]) + relative_base]
+
                 counter = int(val2)
             else:
                 counter += 3
         elif int(instruction[-2:]) == 7:
             if instruction[-3] == '1':
                 val1 = int(codes[counter + 1])
-            else:
+            elif instruction[-3] == '0':
                 val1 = codes[int(codes[counter + 1])]
+            elif instruction[-3] == '2':
+                val1 = codes[int(codes[counter + 1]) + relative_base]
+
             if instruction[-4] == '1':
                 val2 = int(codes[counter + 2])
-            else:
+            elif instruction[-4] == '0':
                 val2 = codes[int(codes[counter + 2])]
-            if int(val1) < int(val2):
-                codes[int(codes[counter + 3])] = '1'
-            else:
-                codes[int(codes[counter + 3])] = '0'
+            elif instruction[-4] == '2':
+                val2 = codes[int(codes[counter + 2]) + relative_base]
+
+            if instruction[-5] == '0':
+                if int(val1) < int(val2):
+                    codes[int(codes[counter + 3])] = '1'
+                else:
+                    codes[int(codes[counter + 3])] = '0'
+            elif instruction[-5] == '2':
+                if int(val1) < int(val2):
+                    codes[int(codes[counter + 3]) + relative_base] = '1'
+                else:
+                    codes[int(codes[counter + 3]) + relative_base] = '0'
+            
             counter += 4
         elif int(instruction[-2:]) == 8:
             if instruction[-3] == '1':
                 val1 = int(codes[counter + 1])
-            else:
+            elif instruction[-3] == '0':
                 val1 = codes[int(codes[counter + 1])]
+            elif instruction[-3] == '2':
+                val1 = codes[int(codes[counter + 1]) + relative_base]
+
             if instruction[-4] == '1':
                 val2 = int(codes[counter + 2])
-            else:
+            elif instruction[-4] == '0':
                 val2 = codes[int(codes[counter + 2])]
-            if int(val1) == int(val2):
-                codes[int(codes[counter + 3])] = '1'
-            else:
-                codes[int(codes[counter + 3])] = '0'
+            elif instruction[-4] == '2':
+                val2 = codes[int(codes[counter + 2]) + relative_base]
+
+            if instruction[-5] == '0':
+                if int(val1) == int(val2):
+                    codes[int(codes[counter + 3])] = '1'
+                else:
+                    codes[int(codes[counter + 3])] = '0'
+            elif instruction[-5] == '2':
+                if int(val1) == int(val2):
+                    codes[int(codes[counter + 3]) + relative_base] = '1'
+                else:
+                    codes[int(codes[counter + 3]) + relative_base] = '0'
+
             counter += 4
         elif int(instruction[-2:]) == 9:
             if instruction[-3] == '1':
-                val1 = int(codes[counter + 1])
-            else:
-                val1 = int(codes[int(codes[counter + 1])])
-            relative_base += val1
+                val1 = codes[counter + 1]
+            elif instruction[-3] == '0':
+                val1 = codes[int(codes[counter + 1])]
+            elif instruction[-3] == '2':
+                val1 = codes[int(codes[counter + 1]) + relative_base]
+            relative_base += int(val1)
             counter += 2
         else:
             print(f'code {codes[counter]} not recognized')
             break
 
-codes = '109,1,204,-1,1001,100,1,100,1008,100,16,101,1006,101,0,99'.split(',')
+# codes = '109,1,204,-1,1001,100,1,100,1008,100,16,101,1006,101,0,99'.split(',')
+# codes = '1102,34915192,34915192,7,4,7,99,0'.split(',')
+# codes = '104,1125899906842624,99'.split(',')
+f = open("input.txt", "r")
+input1 = f.readline()
+codes = input1.split(",")
 decode(codes)
