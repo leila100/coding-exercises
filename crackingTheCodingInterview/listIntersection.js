@@ -81,14 +81,13 @@ list1.add(newNode2);
 list1.add(newNode3);
 list1.add(newNode7);
 list1.add(newNode4);
-list1.add(newNode8);
 
 const list2 = new LinkedList();
 list2.add(newNode5);
 list2.add(newNode6);
-list2.add(newNode3);
+list2.add(newNode8);
 
 list1.print();
 list2.print();
 const n = intersection(list1, list2);
-console.log(n.data);
+console.log(n ? n.data : null);
