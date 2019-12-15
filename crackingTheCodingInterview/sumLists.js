@@ -43,7 +43,7 @@ function addLists(list1, list2) {
   let current2 = list2;
   let carry = 0;
   const result = new LinkedList();
-  while (current1 != null) {
+  while (current1 != null && current2 != null) {
     const sum = carry + current1.data + current2.data;
     console.log(`sum: ${sum}`);
     const digit = sum % 10;
@@ -53,8 +53,22 @@ function addLists(list1, list2) {
     current1 = current1.next;
     current2 = current2.next;
   }
-  if (carry != 0) result.add(carry);
-  console.log(`adding ${carry} to result`);
+  // check if both lists were of different lengths
+  if (current1 != null) {
+    result.add(current1.data + carry);
+    current1 = current1.next;
+    while (current1 != null) {
+      result.add(current1.data);
+      current1 = current1.next;
+    }
+  } else if (current2 != null) {
+    result.add(current2.data + carry);
+    current2 = current2.next;
+    while (current2 != null) {
+      result.add(current2.data);
+      current2 = current2.next;
+    }
+  } else if (carry != 0) result.add(carry); // if same lengths
   return result;
 }
 
@@ -62,10 +76,11 @@ const list1 = new LinkedList();
 list1.add(7);
 list1.add(1);
 list1.add(6);
+list1.add(9);
 
 const list2 = new LinkedList();
 list2.add(5);
 list2.add(9);
-list2.add(2);
+// list2.add(2);
 const result = addLists(list1.head, list2.head);
 result.print();
