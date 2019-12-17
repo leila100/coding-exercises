@@ -28,48 +28,59 @@ freqQuery has the following parameter(s):
 queries: a 2-d array of integers
 */
 
+const fs = require("fs");
+
 function freqQuery(queries) {
+  // just need to know if there was a number count == value in 3
   const arr = {};
   const answer = [];
+  const freq = {};
   for (let i = 0; i < queries.length; i++) {
     const action = queries[i][0];
     const value = queries[i][1];
-    // console.log(`action: ${action}, value: ${value}`);
     if (action == 1) {
-      if (value in arr) {
-        arr[value] += 1;
-      } else {
-        arr[value] = 1;
+      if (!(value in arr)) {
+        arr[value] = 0;
       }
+      arr[value] += 1;
+      if (arr[value] in freq) freq[arr[value]].push(value);
+      else freq[arr[value]] = [value];
+      if (arr[value] > 1) freq[arr[value] - 1] = freq[arr[value] - 1].filter(v => v != value);
     } else if (action == 2) {
-      if (value in arr) {
+      if (value in arr && arr[value] > 0) {
+        freq[arr[value]] = freq[arr[value]].filter(v => v != value);
         arr[value] -= 1;
-        if (arr[value] == 0) delete arr[value];
+        if (arr[value] in freq) freq[arr[value]].push(value);
+        else freq[arr[value]] = [value];
       }
     } else if (action == 3) {
-      found = false;
-      for (let v in arr) {
-        if (arr[v] == value) {
-          answer.push(1);
-          found = true;
-          break;
-        }
-      }
-      if (found == false) answer.push(0);
+      if (value in freq && freq[value].length > 0) answer.push(1);
+      else answer.push(0);
     }
   }
   return answer;
 }
 
-const queries = [
-  [1, 5],
-  [1, 6],
-  [3, 2],
-  [1, 10],
-  [1, 10],
-  [1, 6],
-  [2, 5],
-  [3, 2]
-];
-const answer = freqQuery(queries);
-console.log(answer);
+// const queries = [
+//   [1, 5],
+//   [1, 6],
+//   [3, 2],
+//   [1, 10],
+//   [1, 10],
+//   [1, 6],
+//   [2, 5],
+//   [3, 2]
+// ];
+
+fs.readFile("input.txt", "utf-8", (err, data) => {
+  if (err) throw err;
+
+  //   console.log(data.toString());
+  const queries = data
+    .replace(/\s+$/g, "")
+    .split("\n")
+    .map(pair => pair.split(" "))
+    .map(p => p.map(val => parseInt(val, 10)));
+  const answer = freqQuery(queries);
+  console.log(answer);
+});
