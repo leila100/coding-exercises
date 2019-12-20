@@ -15,22 +15,33 @@ arr: an array of integers
 */
 
 // 2 pointers method
+// function pairs(k, arr) {
+//   var count = 0;
+//   arr.sort(function sortTwoNumbers(a, b) {
+//     return a - b;
+//   });
+//   var p1 = 0;
+//   var p2 = 1;
+//   while (p1 < arr.length && p2 < arr.length) {
+//     let diff = arr[p2] - arr[p1];
+//     if (diff == k) {
+//       console.log(`found k diff between ${p1} and ${p2}: ${arr[p1]} and ${arr[p2]}`);
+//       count++;
+//       p1++;
+//       p2 = p1 + 1;
+//     } else if (diff < k) p2++;
+//     else p1++;
+//   }
+//   return count;
+// }
+
+// using set method
 function pairs(k, arr) {
+  var arrSet = new Set(arr);
   var count = 0;
-  arr.sort(function sortTwoNumbers(a, b) {
-    return a - b;
-  });
-  var p1 = 0;
-  var p2 = 1;
-  while (p1 < arr.length && p2 < arr.length) {
-    let diff = arr[p2] - arr[p1];
-    if (diff == k) {
-      console.log(`found k diff between ${p1} and ${p2}: ${arr[p1]} and ${arr[p2]}`);
-      count++;
-      p1++;
-      p2 = p1 + 1;
-    } else if (diff < k) p2++;
-    else p1++;
+  for (num of arr) {
+    let diff = num - k;
+    if (arrSet.has(diff)) count++;
   }
   return count;
 }
