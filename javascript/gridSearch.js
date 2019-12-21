@@ -34,19 +34,14 @@ function gridSearch(G, P) {
   for (let r = 0; r < rows.length; r++) {
     index = [];
     var nextIndex = null;
-    var re = new RegExp(P[0], "g");
     var row = rows[r];
-    var count = (G[row].match(re) || []).length;
-    console.log(`count: ${count}`);
     var temp = [...G];
-    for (let c = 0; c < count; c++) {
-      console.log(temp);
+    while (temp[0].length > 0) {
       all = true;
       row = rows[r];
       index = temp[row].indexOf(P[0]);
+      if (index == -1) break;
       for (let row = 0; row < temp.length; row++) temp[row] = temp[row].slice(index);
-      console.log(index);
-      console.log(temp);
       for (let i = 1; i < P.length; i++) {
         row++;
         if (row == temp.length) break;
@@ -57,10 +52,9 @@ function gridSearch(G, P) {
         }
       }
       if (all == true) return "YES";
-      for (let row = 0; row < temp.length; row++) temp[row] = temp[row].slice(index + P[0].length);
+      for (let row = 0; row < temp.length; row++) temp[row] = temp[row].slice(index + 1);
     }
   }
-  if (all == true) return "YES";
   return "NO";
 }
 
@@ -95,8 +89,8 @@ function gridSearch(G, P) {
 //   "650629270887160"
 // ];
 // var P = ["99", "99"];
-// var G = ["999999", "121011"];
-// var P = ["99", "11"];
-var G = ["1111111111111", "1111111111111", "1111011111111", "1111111111111", "1111111111111", "1010101010101"];
-var P = ["11111", "11111", "11110"];
+var G = ["999999", "121211"];
+var P = ["99", "11"];
+// var G = ["1111111111111", "1111111111111", "1111011111111", "1111111111111", "1111111111111", "1010101010101"];
+// var P = ["11111", "11111", "11110"];
 console.log(gridSearch(G, P));
