@@ -44,6 +44,18 @@ function sumPairs(arr, k) {
   return solution;
 }
 
-const arr = [0, 10, 7, 11, 3, 13, 2, 12];
-console.log(pairSum(arr, 10));
+// an other O(n) solution
+function sumPairs2(arr, k) {
+  var seen = new Set();
+  var solution = [];
+  for (num of arr) {
+    if (seen.has(k - num)) solution.push([num, k - num]);
+    else seen.add(num);
+  }
+  return solution;
+}
+
+const arr = [0, 10, 7, 11, 3, 13, 2, 12, 8];
+// console.log(pairSum(arr, 10));
 console.log(sumPairs(arr, 10));
+console.log(sumPairs2(arr, 10));
