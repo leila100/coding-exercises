@@ -20,44 +20,29 @@ class Queue {
   constructor() {
     this.storage = [];
     this.storage2 = [];
-    this.top = "";
-    this.dequeueNum = 0;
   }
 
   enqueue(val) {
-    if (this.storage.length === 0) this.top = val;
     this.storage.push(val);
   }
 
   dequeue() {
-    const l = this.storage.length;
-    if (this.storage2.length === 0) {
-      const tempStorage = this.storage.slice(this.dequeueNum + 1, l);
-      this.storage = [...tempStorage];
-      while (tempStorage.length > 0) this.storage2.push(tempStorage.pop());
-      this.top = this.storage2.pop();
-      this.storage2.push(this.top);
-      this.dequeueNum = 0;
-    } else {
-      this.storage2.pop();
-      this.dequeueNum++;
-      if (this.storage2.length === 0) this.top = this.storage[this.dequeueNum];
-      else {
-        this.top = this.storage2.pop();
-        this.storage2.push(this.top);
-      }
-    }
+    if (this.storage2.length === 0) while (this.storage.length > 0) this.storage2.push(this.storage.pop());
+    return this.storage2.pop();
   }
 
   printFront() {
-    console.log(this.top);
+    if (this.storage2.length === 0) while (this.storage.length > 0) this.storage2.push(this.storage.pop());
+    const val = this.storage2.pop();
+    this.storage2.push(val);
+    console.log(val);
   }
 }
 
 function processData(input) {
   const queue = new Queue();
   const inputs = input.split("\n");
-  const n = parseInt(inputs[0]);
+  const n = BigInt(inputs[0]);
   for (let i = 1; i <= n; i++) {
     const [code, val] = inputs[i].split(" ");
     if (code === "1") queue.enqueue(val);
@@ -67,5 +52,6 @@ function processData(input) {
 }
 
 // const input = "10\n1 42\n2\n1 14\n3\n1 28\n3\n1 60\n1 78\n2\n2";
-const input = "8\n1 15\n1 17\n3\n1 25\n2\n3\n2\n3";
+// const input = "8\n1 15\n1 17\n3\n1 25\n2\n3\n2\n3";
+const input = "8\n1 12\n1 14\n3\n2\n3\n1 71\n1 63\n3";
 processData(input);
