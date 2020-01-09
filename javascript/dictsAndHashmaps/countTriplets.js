@@ -15,33 +15,35 @@ r: an integer, the common ratio
 */
 
 function countTriplets(arr, r) {
-  // create a dict with values as keys and indexes as values
-  // go through each num in arr
-  // if num*r and num*r^2 are in arrSet, add to solution triplet array
   const arrDict = {};
-  for (let i = 0; i < arr.length; i++) {
+  for (let i = arr.length - 1; i >= 0; i--) {
     if (arr[i] in arrDict) arrDict[arr[i]].push(i);
     else arrDict[arr[i]] = [i];
   }
-  const solution = [];
+  console.log(arrDict);
+  var count = 0;
+
   for (let i = 0; i < arr.length - 2; i++) {
+    // how many arr[i]*r are there after i
     const second = arr[i] * r;
+    console.log("second: ", second);
+    if (!(second in arrDict)) continue;
+    const secondIndex = arrDict[second].filter(index => index > i);
+    // how many second*r are there after i
     const third = second * r;
-    if (second in arrDict && third in arrDict) {
-      for (let j = 0; j < arrDict[second].length; j++) {
-        for (let k = 0; k < arrDict[third].length; k++) {
-          if (i < arrDict[second][j] && arrDict[second][j] < arrDict[third][k])
-            solution.push([i, arrDict[second][j], arrDict[third][k]]);
-        }
-      }
-    }
+    console.log("third: ", third);
+    if (!(third in arrDict)) continue;
+    secondIndex.forEach(idx => {
+      count += arrDict[third].filter(index => index > idx).length;
+    });
   }
-  return solution.length;
+
+  return count;
 }
 
 // const arr = [1, 4, 16, 64];
+// console.log(countTriplets(arr, 4));
+const arr = [1, 2, 2, 4];
+console.log(countTriplets(arr, 2));
+// const arr = [1, 1, 1];
 // console.log(countTriplets(arr, 1));
-// const arr = [1, 2, 2, 4];
-// console.log(countTriplets(arr, 2));
-const arr = [1, 1, 1];
-console.log(countTriplets(arr, 1));
