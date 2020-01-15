@@ -45,34 +45,47 @@ class Stack {
     }
   }
 
-function sortStack(stack) {
-    const stack2 = new Stack()
-    let len = 0;
-    while (!stack.isEmpty()) {
-        stack2.push(stack.pop())
-        len++
-    }
+// function sortStack(stack) {
+//     const stack2 = new Stack()
+//     let len = 0;
+//     while (!stack.isEmpty()) {
+//         stack2.push(stack.pop())
+//         len++
+//     }
 
-    while (len > 0) {
-        let min = stack2.pop()
-        let count = 0;
-        // find min
-        while (!stack2.isEmpty() && count < len) {
-            let temp = stack2.pop()
-            if (temp < min) {
-                stack.push(min)
-                min = temp
-            } else stack.push(temp)
-            count++
-        }
-        stack2.push(min)
-        while(!stack.isEmpty()) {
-            stack2.push(stack.pop())
-        }
-        len--;
+//     while (len > 0) {
+//         let min = stack2.pop()
+//         let count = 0;
+//         // find min
+//         while (!stack2.isEmpty() && count < len) {
+//             let temp = stack2.pop()
+//             if (temp < min) {
+//                 stack.push(min)
+//                 min = temp
+//             } else stack.push(temp)
+//             count++
+//         }
+//         stack2.push(min)
+//         while(!stack.isEmpty()) {
+//             stack2.push(stack.pop())
+//         }
+//         len--;
+//     }
+//     return stack2;
+// }
+
+// more efficient
+function sortStack(input) {
+    let output = new Stack();
+    while (!input.isEmpty()) {
+      let temp = input.pop();
+      while(!output.isEmpty() && output.peek() > temp) {
+        input.push(output.pop())
+      }
+      output.push(temp);
     }
-    return stack2;
-}
+    return output;
+  }
 
 const s = new Stack();
 s.push(4);
