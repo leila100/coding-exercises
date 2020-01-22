@@ -37,6 +37,36 @@ function minJumps(arr) {
   return minJumps;
 }
 
+/*
+  Solution that utilizes dynamic programming in order to
+  build up a `jumps` array from left to right such that 
+  `jumps[i]` indicates the minimum number of jumps needed
+  to reach that spot from `arr[0]`. At the end, return 
+  `jumps[n-1]`.
+*/
+function minJumps2(arr, n = arr.length) {
+  const jumps = new Array(n);
+
+  if (n === 0 || arr[0] === 0) {
+    return Infinity;
+  }
+
+  jumps[0] = 0;
+
+  for (let i = 1; i < n; i++) {
+    jumps[i] = Infinity;
+    for (let j = 0; j < i; j++) {
+      if (i <= j + arr[j] && jumps[j] !== Infinity) {
+        // if i is in range
+        jumps[i] = Math.min(jumps[i], jumps[j] + 1);
+        break;
+      }
+    }
+  }
+
+  return jumps[n - 1];
+}
+
 console.log(minJumps([1, 3, 5, 8, 9, 2, 6, 7, 6, 8, 9])); // should print 3
 console.log(minJumps([1, 3, 6, 1, 0, 9])); // should print 3
 console.log(minJumps([2, 0, 0, 5, 8, 1, 7, 4, 9, 12, 1])); // should print Infinity
