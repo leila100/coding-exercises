@@ -32,14 +32,14 @@ function minTime(machines, goal) {
   // Well let's start with the upper bound.
   // How many days would it take if ALL machines were equally as slow as the slowest machine?
   //  That means the worst case is goal / machines * slowestMachine
-  const min = Math.min(...machines);
-  let minDay = Math.ceil(goal / machines.length) * min;
+  const max = Math.max(...machines);
+  let maxDay = Math.ceil(goal / machines.length) * max;
 
   // Same thing to find the lower bound.
   // How many days would it take if ALL machines were equally as fast as the fastest machine?
   // Our lower bound is then goal / machines * fastestMachine
-  const max = Math.max(...machines);
-  let maxDay = Math.ceil(goal / machines.length) * max;
+  const min = Math.min(...machines);
+  let minDay = Math.ceil(goal / machines.length) * min;
 
   const getSum = (arr, d) => arr.reduce((total, machine) => total + Math.floor(d / machine), 0);
 
