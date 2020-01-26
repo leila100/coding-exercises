@@ -12,71 +12,46 @@ Example 2:
 Input: "cbbd"
 Output: "bb"
 */
-
-function isPalindrome(s) {
-  const reverse = s
-    .split("")
-    .reverse()
-    .join("");
-  return s === reverse;
-}
-
-var longestPalindrome = function(s) {
-  let maxStr = s[0];
-
-  // build dict with all chars indexes
+function longestPalindrome(s) {
   if (s.length <= 1) return s;
-  const chars = {};
-  const lengths = {};
-  for (let i = 0; i < s.length; i++) {
-    if (s[i] in chars) {
-      for (let j = 0; j < chars[s[i]].length; j++) {
-        if (i - chars[s[i]][j] + 1 > maxStr.length) {
-          const slice = s.slice(chars[s[i]][j], i + 1);
-          if (isPalindrome(slice)) maxStr = slice;
-        }
-      }
-      chars[s[i]].push(i);
-    } else chars[s[i]] = [i];
+  if (s.length == 2) {
+    if (s[0] === s[1]) return s;
+    else return s[0];
   }
-  //   console.log(chars);
-  //   console.log(lengths);
-  //   const subs = Object.keys(lengths).sort((a, b) => b - a);
-  //   console.log(subs);
-  //   if (subs.length === 0) return s[0];
-  //   for (length of subs) {
-  //     for (pair of lengths[length]) {
-  //       console.log(length, pair);
-  //       const subStr = s.slice(pair[0], pair[1] + 1);
-  //       const reverse = subStr
-  //         .split("")
-  //         .reverse()
-  //         .join("");
-  //       console.log(subStr, reverse);
-  //       if (subStr === reverse) return subStr;
-  //     }
-  //   }
-  //   for (char of s) {
-  //     if (chars[char].length > 1) {
-  //       const indexes = chars[char];
-  //       for (let i = 0; i < indexes.length - 1; i++) {
-  //         for (j = i + 1; j < indexes.length; j++) {
-  //           //   console.log(i, j);
-  //           if (indexes[j] - indexes[i] + 1 <= maxStr.length) continue;
-  //           const subStr = s.slice(indexes[i], indexes[j] + 1);
-  //           const reverse = subStr
-  //             .split("")
-  //             .reverse()
-  //             .join("");
-  //           //   console.log(subStr, reverse);
-  //           if (subStr === reverse) maxStr = subStr;
-  //         }
-  //       }
-  //     }
-  //   }
-  return maxStr;
-};
+  let res = [s[0]];
+
+  // expand from center
+  // For each char in s, keep checking indexes to the left and right as long
+  // as they match, add them to temp
+  for (let i = 0; i < s.length - 1; i++) {
+    if (i > 0 && s[i] === s[i - 1]) continue; // already checked
+    let l = i - 1;
+    let r = i + 1;
+    let temp = [s[i]];
+
+    while (r <= s.length - 1) {
+      if (s[i] === s[r]) {
+        // consider when a group of same chars are grouped together
+        temp.push(s[r]);
+        r++;
+      } else break;
+    }
+
+    while (l >= 0 && r < s.length) {
+      if (s[l] === s[r] && r > i) {
+        // if same chars on each side add them to temp
+        temp.unshift(s[l]);
+        temp.push(s[r]);
+        l--;
+        r++;
+      } else break;
+    }
+    if (temp.length > res.length) res = temp;
+  }
+  return res.join("");
+}
 
 console.log(longestPalindrome("babadb"));
 console.log(longestPalindrome("cbbd"));
-console.log(longestPalindrome("abcda"));
+console.log(longestPalindrome("babadada"));
+console.log(longestPalindrome("babaddtattarrattatddetartrateedredividerb"));
