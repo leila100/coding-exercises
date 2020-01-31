@@ -1,6 +1,5 @@
 /*
 You can perform the following operations on the string,a:
-
 Capitalize zero or more of a's lowercase letters.
 Delete all of the remaining lowercase letters in a.
 
@@ -20,6 +19,23 @@ b: the string to match
 */
 
 function abbreviation(a, b) {
+  /*
+  For example, a = "aBbdD" b = "BBD" 
+  since the last character in a is upper case and last character in b is also upper case and both are equal, 
+  f(a,b) = f("aBbd","BB")
+
+  Now d can never be made equal to B therefore- f("aBbd","BB") = f("aBb","BB")
+  Now b can be capitalized to B,therefore we have two options - 
+    either capitalize b to B - f("aBb","BB") = f("aB","B")
+    or 
+    don't capitalize b.  f("aB","BB") 
+
+  if we have something like a = 'C' and b = 'D' then f(a,b) evaluates to False.
+  Lastly (for initialization of the dp array)-
+    if a is non-empty and b is empty, then f(a,b) is True only if all the characters in a are lower case.
+    if a is empty and b is non-empty, then f(a,b) is always False.
+    if both are empty then f(a,b) = True
+  */
   /*
     For input a = "daBcd", b = "ABC":
 
@@ -74,7 +90,10 @@ function abbreviation(a, b) {
   for (let i = 0; i < n + 1; i++) {
     for (let j = 1; j < m + 1; j++) {
       if (a[j - 1] === b[i - 1]) dp[i][j] = dp[i - 1][j - 1];
+      // if same chars, continue
+      // if a upper char same as b char, either continue or remove a char
       else if (a[j - 1].toUpperCase() === b[i - 1]) dp[i][j] = dp[i - 1][j - 1] || dp[i][j - 1];
+      // if chars are different, if a char is lowercase, just remove it
       else if (lowerCase.has(a[j - 1])) dp[i][j] = dp[i][j - 1];
     }
   }
