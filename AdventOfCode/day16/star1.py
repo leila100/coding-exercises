@@ -108,13 +108,17 @@ def execute_phase(signal):
 
 #  execute for 100 phases
 # signal = '12345678'
-# signal = '80871224585914546619083218645595'
+signal = '03036732577212944063491565474664'
 # signal = '19617804207202209144916044189917'
 # signal = '69317163492948606335995924319873'
-f = open("input.txt", "r")
-signal = f.readline()
-output = signal
+# f = open("input.txt", "r")
+# signal = f.readline()
+first_7 = int(signal[:7])
+output = ""
+for repeat in range(100):
+    output += signal
+# output = signal
 for phase in range(100):
     output = execute_phase(output)
     # print(f'phase {phase}: {output}')
-print(f'first 8 digits of output: {output[:8]}')
+print(f'first 8 digits of output: {output[first_7 : first_7 + 8]}')
