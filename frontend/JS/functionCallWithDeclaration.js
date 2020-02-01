@@ -9,4 +9,3 @@ var result = (function(a) {
   The trick is, if you put parentheses with arguments immediately after function declaration, 
   that will be considered a function call.
   */
-
