@@ -17,42 +17,25 @@ A is sorted in increasing order.
 */
 
 var sortedSquares = function(A) {
-  // go through array and find the index where before all nums < 0 and after all nums > 0
-  let i = 0;
-  while (i < A.length) {
-    if (A[i] >= 0) break;
-    i++;
-  }
-  if (i === 0 || i === A.length) return A.map(num => num * num);
-  const solution = [];
-  let left = i - 1;
-  let right = i;
-  while (left >= 0 && right < A.length) {
-    const l2 = Math.pow(A[left], 2);
-    const r2 = Math.pow(A[right], 2);
-    if (r2 < l2) {
-      solution.push(r2);
-      right++;
+  const len = A.length;
+  const squares = Array(len);
+  let start = 0;
+  let end = len - 1;
+
+  for (let i = end; i >= 0; i--) {
+    const sq1 = A[start] ** 2;
+    const sq2 = A[end] ** 2;
+
+    if (sq1 > sq2) {
+      squares[i] = sq1;
+      start++;
     } else {
-      solution.push(l2);
-      left--;
+      squares[i] = sq2;
+      end--;
     }
   }
-  if (left < 0) {
-    while (right < A.length) {
-      const r2 = Math.pow(A[right], 2);
-      solution.push(r2);
-      right++;
-    }
-  }
-  if (right >= A.length) {
-    while (left >= 0) {
-      const l2 = Math.pow(A[left], 2);
-      solution.push(l2);
-      left--;
-    }
-  }
-  return solution;
+
+  return squares;
 };
 
 // const arr = [-4, -1, 0, 3, 10];
