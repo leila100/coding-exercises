@@ -120,8 +120,57 @@ function swapTwoNums(a, b) {
   b = a - b;
   console.log("after swap: ", "a: ", a, ", b: ", b);
 }
-swapTwoNums(4, 5);
-// Reverse a string in JavaScript?
+// swapTwoNums(4, 5);
+
+// 8- Reverse a string in JavaScript?
+function reverseString(str) {
+  // O(n)
+  const reverse = [];
+  for (let i = str.length - 1; i >= 0; i--) reverse.push(str[i]);
+  return reverse.join("");
+
+  /* half complexity
+    str = str.split('');
+    var len = str.length,
+      halfIndex = Math.floor(len / 2) - 1,
+      revStr;
+    // swap values starting until the middle
+    for (var i = 0; i <= halfIndex; i++) {
+      revStr = str[len - i - 1];
+      str[len - i - 1] = str[i];
+      str[i] = revStr;
+    }
+    return str.join('');
+  */
+
+  /*  recursive way
+     if (str === "") {
+        return "";
+    } else {
+        return reverse(str.substr(1)) + str.charAt(0);
+    }
+  */
+
+  /* use build in methods
+    if(!str || str.length <2) return str;
+    return str.split('').reverse().join('');
+  */
+}
+
+function reverseInPlace(str) {
+  return str
+    .split(" ")
+    .reverse()
+    .join(" ")
+    .split("")
+    .reverse()
+    .join("");
+}
+
+console.log(reverseInPlace("I am the good boy"));
+// "I ma eht doog yob"
+console.log(reverseString("Leila"));
+
 // Reverse words in a sentence?
 // Reverse words in place?
 // Find the first non repeating char in a string?
