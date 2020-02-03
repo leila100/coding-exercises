@@ -10,10 +10,26 @@ function isPrime(num) {
   }
   return true;
 }
-console.log(isPrime(37));
-console.log(isPrime(40));
+// console.log(isPrime(37));
+// console.log(isPrime(40));
 
-// Find all prime factors of a number?
+// 2- Find all prime factors of a number?
+function getPrimeFactors(num) {
+  const solution = [];
+  let divisor = 2;
+  while (num > 2) {
+    if (num % divisor === 0) {
+      solution.push(divisor);
+      num = num / divisor;
+    } else divisor++;
+  }
+  return solution;
+}
+console.log(getPrimeFactors(45));
+console.log(getPrimeFactors(11));
+console.log(getPrimeFactors(69));
+console.log(getPrimeFactors(80));
+
 // Get nth Fibonacci number?
 // Find the greatest common divisor of two numbers?
 // Remove duplicate members from an array?
