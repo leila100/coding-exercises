@@ -110,9 +110,17 @@ function mergeSortedArrays(arr1, arr2) {
 }
 const arr1 = [1, 2, 3, 4, 15, 25];
 const arr2 = [2, 4, 6, 8, 10];
-console.log(mergeSortedArrays(arr1, arr2));
+// console.log(mergeSortedArrays(arr1, arr2));
 
-// Swap two numbers without using a temp variable?
+// 7- Swap two numbers without using a temp variable?
+function swapTwoNums(a, b) {
+  console.log("before swap: ", "a: ", a, ", b: ", b);
+  b = b - a;
+  a = a + b;
+  b = a - b;
+  console.log("after swap: ", "a: ", a, ", b: ", b);
+}
+swapTwoNums(4, 5);
 // Reverse a string in JavaScript?
 // Reverse words in a sentence?
 // Reverse words in place?
