@@ -181,7 +181,7 @@ function reverseWords(str) {
 function firstNonRepeating(str) {
   const repeating = new Set();
   let firsts = new Set();
-  for (char of str) {
+  for (let char of str) {
     if (!repeating.has(char)) {
       firsts.add(char);
       repeating.add(char);
@@ -191,9 +191,23 @@ function firstNonRepeating(str) {
   return Array.from(firsts.values())[0];
 }
 
-console.log(firstNonRepeating("the quick brown fox jumps then quickly blow air"));
+// console.log(firstNonRepeating("the quick brown fox jumps then quickly blow air"));
 
-// Remove duplicate characters from a sting?
+// 10- Remove duplicate characters from a sting?
+function removeDuplicateChars(str) {
+  const repeating = new Set();
+  let firsts = new Set();
+  for (let char of str) {
+    if (!repeating.has(char)) {
+      firsts.add(char);
+      repeating.add(char);
+    } else firsts.delete(char);
+  }
+  return Array.from(firsts.values()).join("");
+}
+console.log(removeDuplicateChars("berrouayel"));
+console.log(removeDuplicateChars("Learn more javascript dude"));
+
 // Verify a word as palindrome?
 // Generate random between 5 to 7 by using defined function.
 // Find missing number from unsorted array of integers.
