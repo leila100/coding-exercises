@@ -88,9 +88,30 @@ function removeDuplicates(arr) {
 }
 
 const arr = [2, 5, 6, 2, 4, 5];
-console.log(removeDuplicates(arr));
+// console.log(removeDuplicates(arr));
 
-// Merge two sorted array?
+// 6- Merge two sorted array?
+function mergeSortedArrays(arr1, arr2) {
+  let solution = [];
+  let idx1 = 0;
+  let idx2 = 0;
+  while (idx1 < arr1.length && idx2 < arr2.length) {
+    if (arr1[idx1] < arr2[idx2]) {
+      solution.push(arr1[idx1]);
+      idx1++;
+    } else {
+      solution.push(arr2[idx2]);
+      idx2++;
+    }
+  }
+  if (idx1 < arr1.length) solution = solution.concat(arr1.slice(idx1));
+  if (idx2 < arr2.length) solution = solution.concat(arr2.slice(idx2));
+  return solution;
+}
+const arr1 = [1, 2, 3, 4, 15, 25];
+const arr2 = [2, 4, 6, 8, 10];
+console.log(mergeSortedArrays(arr1, arr2));
+
 // Swap two numbers without using a temp variable?
 // Reverse a string in JavaScript?
 // Reverse words in a sentence?
