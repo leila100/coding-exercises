@@ -42,11 +42,35 @@ function getNthFib(n) {
   }
   return fibs[n];
 }
-console.log(getNthFib(5));
-console.log(getNthFib(12));
-console.log(getNthFib(2));
+// console.log(getNthFib(5));
+// console.log(getNthFib(12));
+// console.log(getNthFib(2));
 
-// Find the greatest common divisor of two numbers?
+// 4- Find the greatest common divisor of two numbers?
+function greatestCommonDivisor(num1, num2) {
+  var divisor = 2,
+    greatestDivisor = 1;
+
+  // if num1 or num2 are negative values
+  if (num1 < 2 || num2 < 2) return 1;
+
+  while (num1 >= divisor && num2 >= divisor) {
+    if (num1 % divisor == 0 && num2 % divisor == 0) {
+      greatestDivisor = divisor;
+    }
+    divisor++;
+  }
+  return greatestDivisor;
+}
+function greatestCommonDivisorRecursive(num1, num2) {
+  if (num2 == 0) return num1;
+  else return greatestCommonDivisorRecursive(num2, num1 % num2);
+}
+
+// console.log(greatestCommonDivisor(25, 60));
+// console.log(greatestCommonDivisor(14, 21));
+// console.log(greatestCommonDivisorRecursive(14, 21));
+
 // Remove duplicate members from an array?
 // Merge two sorted array?
 // Swap two numbers without using a temp variable?
