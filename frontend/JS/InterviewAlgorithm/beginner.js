@@ -216,11 +216,39 @@ function isPalindrome(word) {
     .join("");
   return word === reverse;
 }
-console.log(isPalindrome("madam"));
-console.log(isPalindrome("toyota"));
+// console.log(isPalindrome("madam"));
+// console.log(isPalindrome("toyota"));
 
-// Generate random between 5 to 7 by using defined function.
-// Find missing number from unsorted array of integers.
+// 12- Generate random between 5 to 7 by using defined function.
+// generate numbers between 1 and 5
+function rand5() {
+  return 1 + Math.random() * 4;
+}
+
+// generate numbers between 5 and 7
+function rand7() {
+  return 5 + (rand5() / 5) * 2;
+}
+
+// 13- Find missing number from unsorted array from 1 to 100 of integers.
+function findMissingNum(nums) {
+  const numSet = new Set(nums);
+  let i = 1;
+  while (numSet.has(i)) i++;
+  return i;
+}
+// the sum of a linear series of n numbers = n*(n+1)/2
+function missingNumber(arr) {
+  var n = arr.length + 1,
+    sum = 0,
+    expectedSum = (n * (n + 1)) / 2;
+  for (var i = 0, len = arr.length; i < len; i++) sum += arr[i];
+  return expectedSum - sum;
+}
+
+console.log(findMissingNum([5, 2, 6, 1, 3]));
+console.log(missingNumber([5, 2, 6, 1, 3]));
+
 // Check whether any two numbers in an array sums to a given number?
 // Find the largest sum of any two elements?
 // Total number of zeros from 1 upto n?
