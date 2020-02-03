@@ -205,10 +205,20 @@ function removeDuplicateChars(str) {
   }
   return Array.from(firsts.values()).join("");
 }
-console.log(removeDuplicateChars("berrouayel"));
-console.log(removeDuplicateChars("Learn more javascript dude"));
+// console.log(removeDuplicateChars("berrouayel"));
+// console.log(removeDuplicateChars("Learn more javascript dude"));
 
-// Verify a word as palindrome?
+// 11- Verify a word is a palindrome?
+function isPalindrome(word) {
+  const reverse = word
+    .split("")
+    .reverse()
+    .join("");
+  return word === reverse;
+}
+console.log(isPalindrome("madam"));
+console.log(isPalindrome("toyota"));
+
 // Generate random between 5 to 7 by using defined function.
 // Find missing number from unsorted array of integers.
 // Check whether any two numbers in an array sums to a given number?
