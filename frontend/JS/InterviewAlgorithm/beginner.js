@@ -157,6 +157,7 @@ function reverseString(str) {
   */
 }
 
+// Reverse words in place?
 function reverseInPlace(str) {
   return str
     .split(" ")
@@ -167,13 +168,31 @@ function reverseInPlace(str) {
     .join("");
 }
 
-console.log(reverseInPlace("I am the good boy"));
+// console.log(reverseInPlace("I am the good boy"));
 // "I ma eht doog yob"
-console.log(reverseString("Leila"));
+// console.log(reverseString("Leila"));
 
 // Reverse words in a sentence?
-// Reverse words in place?
-// Find the first non repeating char in a string?
+function reverseWords(str) {
+  return str.split(" ").reverse();
+}
+
+// 9- Find the first non repeating char in a string?
+function firstNonRepeating(str) {
+  const repeating = new Set();
+  let firsts = new Set();
+  for (char of str) {
+    if (!repeating.has(char)) {
+      firsts.add(char);
+      repeating.add(char);
+    } else firsts.delete(char);
+  }
+  console.log(firsts);
+  return Array.from(firsts.values())[0];
+}
+
+console.log(firstNonRepeating("the quick brown fox jumps then quickly blow air"));
+
 // Remove duplicate characters from a sting?
 // Verify a word as palindrome?
 // Generate random between 5 to 7 by using defined function.
