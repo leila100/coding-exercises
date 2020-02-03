@@ -71,7 +71,25 @@ function greatestCommonDivisorRecursive(num1, num2) {
 // console.log(greatestCommonDivisor(14, 21));
 // console.log(greatestCommonDivisorRecursive(14, 21));
 
-// Remove duplicate members from an array?
+// 5- Remove duplicate members from an array?
+function removeDuplicates(arr) {
+  // use a set
+  //   return Array.from(new Set(arr));
+  // if can't use set
+  const noDups = {};
+  const solution = [];
+  for (num of arr) {
+    if (!noDups[num]) {
+      solution.push(num);
+      noDups[num] = true;
+    }
+  }
+  return solution;
+}
+
+const arr = [2, 5, 6, 2, 4, 5];
+console.log(removeDuplicates(arr));
+
 // Merge two sorted array?
 // Swap two numbers without using a temp variable?
 // Reverse a string in JavaScript?
