@@ -25,12 +25,27 @@ function getPrimeFactors(num) {
   }
   return solution;
 }
-console.log(getPrimeFactors(45));
-console.log(getPrimeFactors(11));
-console.log(getPrimeFactors(69));
-console.log(getPrimeFactors(80));
+// console.log(getPrimeFactors(45));
+// console.log(getPrimeFactors(11));
+// console.log(getPrimeFactors(69));
+// console.log(getPrimeFactors(80));
 
-// Get nth Fibonacci number?
+// 3- Get nth Fibonacci number?
+// fib(n) = fib(n-1) + fib(n-2) with fib(0) = 0; fib(1) = 1
+function getNthFib(n) {
+  const fibs = [0, 1];
+  let len = 2;
+  while (len <= n) {
+    const fib = fibs[len - 1] + fibs[len - 2];
+    fibs.push(fib);
+    len++;
+  }
+  return fibs[n];
+}
+console.log(getNthFib(5));
+console.log(getNthFib(12));
+console.log(getNthFib(2));
+
 // Find the greatest common divisor of two numbers?
 // Remove duplicate members from an array?
 // Merge two sorted array?
