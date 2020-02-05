@@ -305,7 +305,31 @@ function countZero(n) {
   return count;
 }
 
-console.log(countZero(2014));
+// console.log(countZero(2014));
 
-// Match substring of a sting?
+// 17- Match substring of a sting?
+function subStringFinder(str, subStr) {
+  var idx = 0,
+    i = 0,
+    j = 0,
+    len = str.length,
+    subLen = subStr.length;
+
+  for (; i < len; i++) {
+    if (str[i] == subStr[0]) {
+      let k = i;
+      while (str[k] == subStr[j] && k < len && j < subLen) {
+        j++;
+        k++;
+      }
+      if (j == subLen) return i;
+      else j = 0;
+    }
+  }
+
+  return -1;
+}
+console.log(subStringFinder("abbcdabbbbbck", "bbbck"));
+console.log(subStringFinder("abbcdabbbbbck", "bck"));
+
 // Create all permutation of a string?
