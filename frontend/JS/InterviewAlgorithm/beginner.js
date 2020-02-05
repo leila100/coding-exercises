@@ -246,10 +246,23 @@ function missingNumber(arr) {
   return expectedSum - sum;
 }
 
-console.log(findMissingNum([5, 2, 6, 1, 3]));
-console.log(missingNumber([5, 2, 6, 1, 3]));
+// console.log(findMissingNum([5, 2, 6, 1, 3]));
+// console.log(missingNumber([5, 2, 6, 1, 3]));
 
-// Check whether any two numbers in an array sums to a given number?
+// 14- Check whether any two numbers in an array sums to a given number?
+function sumFinder(arr, sum) {
+  const diffSet = new Set();
+  let diff = 0;
+  for (let num of arr) {
+    diff = sum - num;
+    if (diffSet.has(diff)) return true;
+    else diffSet.add(num);
+  }
+  return false;
+}
+console.log(sumFinder([6, 4, 3, 2, 1, 7], 9));
+console.log(sumFinder([6, 4, 3, 2, 1, 7], 2));
+
 // Find the largest sum of any two elements?
 // Total number of zeros from 1 upto n?
 // Match substring of a sting?
