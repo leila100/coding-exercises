@@ -287,10 +287,25 @@ function topSum(arr) {
   return max1 + max2;
 }
 
-console.log(topSum([6, 4, 3, 2, 1, 7]));
-console.log(topSum([3, 31, 7, 2, 10, 1, 0]));
-console.log(topSum([3, 0]));
+// console.log(topSum([6, 4, 3, 2, 1, 7]));
+// console.log(topSum([3, 31, 7, 2, 10, 1, 0]));
+// console.log(topSum([3, 0]));
 
-// Total number of zeros from 1 upto n?
+// 16- Total number of zeros from 1 up to n?
+//Answer: If n = 100. number of 0 would be 11 (0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100).
+// Please note that 100 has two 0.
+//Explanation: So the trick here is. if you have a number 1 to 50 the value is 5. just 50 divided by 10.
+// However, if the value is 100. the value is 11. you will get by 100/10 = 10 and 10/10.
+function countZero(n) {
+  var count = 0;
+  while (n > 0) {
+    count += Math.floor(n / 10);
+    n = n / 10;
+  }
+  return count;
+}
+
+console.log(countZero(2014));
+
 // Match substring of a sting?
 // Create all permutation of a string?
