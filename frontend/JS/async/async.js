@@ -17,7 +17,6 @@ Create a function helloGoodbye that console logs hello right away, and good bye 
 
 Challenge 4
 Create a function brokenRecord that console logs hi again every second. 
-Use the End Code button to stop the console logs when you are satisfied that it is working.
 
 Challenge 5
 Create a function limitedRepeat that console logs hi for now every second, but only for 5 seconds. 
@@ -118,15 +117,23 @@ function brokenRecord() {
   setInterval(() => console.log("hi again"), 1000);
 }
 // Uncomment the following line to check your work!
-brokenRecord(); // should log (every second): hi again
+// brokenRecord(); // should log (every second): hi again
 
 /* CHALLENGE 5 */
+// Create a function limitedRepeat that console logs hi for now every second, but only for 5 seconds.
+// Research how to use clearInterval if you are not sure how to do this.
 
 function limitedRepeat() {
-  // ADD CODE HERE
+  var counter = 0;
+  function printMessage() {
+    console.log("hi for now");
+    counter++;
+    if (counter >= 5) clearInterval(printEverySecond);
+  }
+  var printEverySecond = setInterval(printMessage, 1000);
 }
 // Uncomment the following line to check your work!
-// limitedRepeat(); // should log (every second, for 5 seconds): hi for now
+limitedRepeat(); // should log (every second, for 5 seconds): hi for now
 
 /* CHALLENGE 6 */
 
