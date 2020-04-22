@@ -109,15 +109,16 @@ function helloGoodbye() {
   setTimeout(() => console.log("good bye"), 2000);
 }
 // Uncomment the following line to check your work!
-helloGoodbye(); // should log: hello // should also log (after 2 seconds): good bye
+// helloGoodbye(); // should log: hello // should also log (after 2 seconds): good bye
 
 /* CHALLENGE 4 */
+// Create a function brokenRecord that console logs hi again every second.
 
 function brokenRecord() {
-  // ADD CODE HERE
+  setInterval(() => console.log("hi again"), 1000);
 }
 // Uncomment the following line to check your work!
-// brokenRecord(); // should log (every second): hi again
+brokenRecord(); // should log (every second): hi again
 
 /* CHALLENGE 5 */
 
