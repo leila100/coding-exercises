@@ -245,26 +245,58 @@ class SecondClock {
 }
 
 // UNCOMMENT THESE TO TEST YOUR WORK!
-const clock = new SecondClock((val) => {
-  console.log(val);
-});
-console.log("Started Clock.");
-clock.start();
-setTimeout(() => {
-  clock.reset();
-  console.log("Stopped Clock after 6 seconds.");
-}, 6000);
+// const clock = new SecondClock((val) => {
+//   console.log(val);
+// });
+// console.log("Started Clock.");
+// clock.start();
+// setTimeout(() => {
+//   clock.reset();
+//   console.log("Stopped Clock after 6 seconds.");
+// }, 6000);
 
 /* CHALLENGE 10 */
+/*
+Write a function called debounce that accepts a function and returns a new function that only allows 
+invocation of the given function after interval milliseconds have passed since the last time the returned function ran.
+
+Additional calls to the returned function within the interval time should not be invoked or queued, 
+but the timer should still get reset.
+
+*/
 
 function debounce(callback, interval) {
-  // ADD CODE HERE
+  var timer = 0;
+  var stopInterval;
+  var returnVal;
+  function startTimer() {
+    clearInterval(stopInterval);
+    if (timer >= interval / 1000 || timer === 0) {
+      returnVal = callback();
+    } else returnVal = undefined;
+    timer = 0;
+    stopInterval = setInterval(() => {
+      timer++;
+    }, 1000);
+    return returnVal;
+  }
+  return () => {
+    return startTimer();
+  };
 }
 
 // UNCOMMENT THESE TO TEST YOUR WORK!
-// function giveHi() { return 'hi'; }
-// const giveHiSometimes = debounce(giveHi, 3000);
-// console.log(giveHiSometimes()); // -> 'hi'
-// setTimeout(function() { console.log(giveHiSometimes()); }, 2000); // -> undefined
-// setTimeout(function() { console.log(giveHiSometimes()); }, 4000); // -> undefined
-// setTimeout(function() { console.log(giveHiSometimes()); }, 8000); // -> 'hi'
+function giveHi() {
+  return "hi";
+}
+const giveHiSometimes = debounce(giveHi, 3000);
+console.log(giveHiSometimes()); // -> 'hi'
+setTimeout(function () {
+  console.log(giveHiSometimes());
+}, 2000); // -> undefined
+setTimeout(function () {
+  console.log(giveHiSometimes());
+}, 4000); // -> undefined
+setTimeout(function () {
+  console.log(giveHiSometimes());
+}, 8000); // -> 'hi'
