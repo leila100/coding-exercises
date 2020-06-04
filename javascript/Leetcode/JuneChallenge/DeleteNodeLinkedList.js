@@ -47,3 +47,11 @@ var deleteNode = function (node) {
   }
   prevNode.next = null;
 };
+
+//  Better solution
+/*
+var deleteNode = function(node) {
+    node.val = node.next.val
+    node.next = node.next.next
+};
+*/
