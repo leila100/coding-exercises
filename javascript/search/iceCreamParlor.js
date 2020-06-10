@@ -36,7 +36,8 @@ function whatFlavors(cost, money) {
   for (let i = 0; i < cost.length; i++) {
     if (cost[i] <= money) {
       var diff = money - cost[i];
-      if (diff in checked) return i + 1 < checked[diff] ? `${i + 1} ${checked[diff]}` : `${checked[diff]} ${i + 1}`;
+      // if (diff in checked) return i + 1 < checked[diff] ? `${i + 1} ${checked[diff]}` : `${checked[diff]} ${i + 1}`;
+      if (diff in checked) return i + 1 < checked[diff] ? [i + 1, checked[diff]] : [checked[diff], i + 1];
       else checked[cost[i]] = i + 1;
     }
   }
