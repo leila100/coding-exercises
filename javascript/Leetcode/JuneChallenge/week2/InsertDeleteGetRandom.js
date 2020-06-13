@@ -99,8 +99,3 @@ obj.insert(7);
 obj.insert(1);
 console.log(obj);
 console.log(obj.getRandom());
-
-const mySet = new Set([2, 5, 6, 7]);
-console.log(Object.keys(mySet));
-console.log(mySet.entries());
-console.log(Set.get([...mySet.values()][Math.floor(Math.random() * mySet.size)]));
