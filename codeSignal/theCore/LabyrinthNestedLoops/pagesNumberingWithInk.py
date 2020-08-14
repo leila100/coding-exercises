@@ -61,5 +61,11 @@ def pagesNumberingWithInk(current, numberOfDigits):
         return current
   return current
 
+# recursive solution
+# def pagesNumberingWithInk(current, numberOfDigits):
+#     if numberOfDigits < 0:
+#         return current - 2
+#     return pagesNumberingWithInk(current+1, numberOfDigits - len(str(current)))
+
 print(pagesNumberingWithInk(1, 5))
 print(pagesNumberingWithInk(22, 5))
