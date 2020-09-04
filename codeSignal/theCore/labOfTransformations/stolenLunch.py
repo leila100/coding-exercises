@@ -33,10 +33,8 @@ The deciphered note.
 
 def stolenLunch(note):
     letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j']
-    # numToChar = {}
     charToNum = {}
     for i, letter in enumerate(letters):
-        # numToChar[str(i)] = letter
         charToNum[letter] = str(i)
     
     answer = ""
