@@ -44,6 +44,11 @@ def higherVersion(ver1, ver2):
             return False
     return False
 
+'''
+def higherVersion(ver1, ver2):
+    return list(map(int,ver1.split('.'))) > list(map(int,ver2.split('.')))
+'''
+
 ver1 = "1.2.2"
 ver2 = "1.2.0"
 print(higherVersion(ver1, ver2))
